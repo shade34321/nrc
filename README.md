@@ -1,3 +1,4 @@
+NHTSA Recall Crawler
 A simple web crawler to gather the recalls from NHTSA's website.
 
 
