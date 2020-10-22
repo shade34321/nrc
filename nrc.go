@@ -46,6 +46,11 @@ func GetAllMakes() {
 		fmt.Printf("key: %s\n", k)
 		if k == "Results" {
 			fmt.Printf("v type: %T\n", v)
+			for _, j := range v.([]interface{}) {
+				for l, m := range j.(map[string]interface{}) {
+					fmt.Printf("type l: %T\t type m: %T\n", l, m)
+				}
+			}
 		}
 	}
 
