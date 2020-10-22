@@ -17,14 +17,14 @@ var baseURL = "https://vpic.nhtsa.dot.gov/api/vehicles/"
 var makes []carMakes
 
 func main() {
-	fmt.Println("Start NRC")
+	fmt.Println("Starting NRC")
 	GetAllMakes()
 }
 
 // GetAllMakes - gets every make returned from the API
 func GetAllMakes() {
 	url := baseURL + "GetAllMakes?format=json"
-	var jsonData interface{}
+	var jsonData map[string]interface{}
 
 	response, err := http.Get(url)
 	if err != nil {
@@ -36,16 +36,17 @@ func GetAllMakes() {
 		fmt.Printf("error reading body %s\n", err)
 	}
 
-	fmt.Println(data)
-
-	err = json.Unmarshal(data, jsonData)
+	err = json.Unmarshal(data, &jsonData)
 
 	if err != nil {
 		fmt.Printf("Received error unmarshalling %s\n", err)
 	}
 
-	for k, v := range jsonData.(map[string]interface{}) {
-		fmt.Printf("key type: %T\t value type: %T\n", k, v)
+	for k, v := range jsonData {
+		fmt.Printf("key: %s\n", k)
+		if k == "Results" {
+			fmt.Printf("v type: %T\n", v)
+		}
 	}
 
 }
